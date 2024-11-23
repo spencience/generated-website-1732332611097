@@ -1,11 +1,13 @@
+Here's the corrected HTML with proper structure and improved accessibility:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rubber Duck Emporium - Your Digital Duck Companion</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubber Duck Emporium - Your Digital Duck Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
         .duck-pixel {
             image-rendering: pixelated;
             width: 32px;
@@ -44,88 +46,81 @@
     </style>
 </head>
 <body class="bg-yellow-50">
-<header class="bg-yellow-400 p-4 shadow-md">
-<nav class="max-w-6xl mx-auto flex justify-between items-center">
-<h1 class="text-3xl font-bold flex items-center gap-2">
-<div class="duck-pixel"></div>
+    <header class="bg-yellow-400 p-4 shadow-md">
+        <nav class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold flex items-center gap-2">
+                <div class="duck-pixel"></div>
                 Rubber Duck Emporium
             </h1>
-<div class="space-x-4">
-<a href="https://rubberduck.dev/debug" class="hover:text-yellow-800">Debug with Ducks</a>
-<a href="https://rubberduck.dev/shop" class="hover:text-yellow-800">Duck Shop</a>
-<a href="https://rubberduck.dev/community" class="hover:text-yellow-800">Duck Community</a>
-</div>
-</nav>
-</header>
-<main class="max-w-6xl mx-auto p-8">
-<section class="grid md:grid-cols-2 gap-8">
-<div class="space-y-4">
-<h2 class="text-2xl font-bold">Your Digital Debugging Companion</h2>
-<p class="text-gray-700">Welcome to the world's premier digital rubber duck debugging assistant. Our pixel-perfect ducks are here to help you solve your coding problems with their patient listening skills.</p>
-<form method="GET" action="https://rubberduck.dev/debug/start" class="space-y-4">
-<div>
-<label class="block text-gray-700">What's on your mind?</label>
-<textarea name="problem" class="w-full p-2 border rounded" rows="4" placeholder="Explain your code problem to the duck..."></textarea>
-</div>
-<button type="submit" class="bg-yellow-400 px-4 py-2 rounded hover:bg-yellow-500 transition">
+            <div class="space-x-4">
+                <a href="https://rubberduck.dev/debug" class="hover:text-yellow-800">Debug with Ducks</a>
+                <a href="https://rubberduck.dev/shop" class="hover:text-yellow-800">Duck Shop</a>
+                <a href="https://rubberduck.dev/community" class="hover:text-yellow-800">Duck Community</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-8">
+        <section class="grid md:grid-cols-2 gap-8">
+            <div class="space-y-4">
+                <h2 class="text-2xl font-bold">Your Digital Debugging Companion</h2>
+                <p class="text-gray-700">Welcome to the world's premier digital rubber duck debugging assistant. Our pixel-perfect ducks are here to help you solve your coding problems with their patient listening skills.</p>
+                <form method="GET" action="https://rubberduck.dev/debug/start" class="space-y-4">
+                    <div>
+                        <label for="problem-input" class="block text-gray-700">What's on your mind?</label>
+                        <textarea 
+                            id="problem-input"
+                            name="problem" 
+                            class="w-full p-2 border rounded" 
+                            rows="4" 
+                            placeholder="Explain your code problem to the duck..."
+                            aria-label="Enter your coding problem for rubber duck debugging"></textarea>
+                    </div>
+                    <button type="submit" class="bg-yellow-400 px-4 py-2 rounded hover:bg-yellow-500 transition">
                         Start Debugging Session
                     </button>
-</form>
-</div>
-<div class="water-ripple rounded-lg p-8 flex items-center justify-center">
-<div class="grid grid-cols-3 gap-4">
-<div class="duck-pixel"></div>
-<div class="duck-pixel"></div>
-<div class="duck-pixel"></div>
-<div class="duck-pixel"></div>
-<div class="duck-pixel"></div>
-<div class="duck-pixel"></div>
-</div>
-</div>
-</section>
-<section class="mt-12 grid md:grid-cols-3 gap-8">
-<div class="bg-white p-6 rounded-lg shadow">
-<h3 class="text-xl font-bold mb-2">Debug Mode</h3>
-<p class="text-gray-600">Our ducks are trained in multiple programming languages and debugging techniques.</p>
-<a href="https://rubberduck.dev/features" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Learn more →</a>
-</div>
-<div class="bg-white p-6 rounded-lg shadow">
-<h3 class="text-xl font-bold mb-2">Duck Collection</h3>
-<p class="text-gray-600">Choose from our vast collection of debugging ducks, each with unique personalities.</p>
-<a href="https://rubberduck.dev/collection" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">View collection →</a>
-</div>
-<div class="bg-white p-6 rounded-lg shadow">
-<h3 class="text-xl font-bold mb-2">Duck Stats</h3>
-<p class="text-gray-600">Track your debugging success rate and earn achievements with your duck.</p>
-<a href="https://rubberduck.dev/stats" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Check stats →</a>
-</div>
-</section>
-</main>
-<footer class="bg-yellow-100 mt-12 p-8">
-<div class="max-w-6xl mx-auto text-center text-gray-600">
-<p>© 2024 Rubber Duck Emporium - Your trusted debugging companion</p>
-<div class="mt-2">
-<a href="https://rubberduck.dev/terms" class="hover:text-yellow-800 mx-2">Terms</a>
-<a href="https://rubberduck.dev/privacy" class="hover:text-yellow-800 mx-2">Privacy</a>
-<a href="https://rubberduck.dev/contact" class="hover:text-yellow-800 mx-2">Contact</a>
-</div>
-</div>
-</footer>
+                </form>
+            </div>
+            <div class="water-ripple rounded-lg p-8 flex items-center justify-center">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-12 grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Debug Mode</h3>
+                <p class="text-gray-600">Our ducks are trained in multiple programming languages and debugging techniques.</p>
+                <a href="https://rubberduck.dev/features" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Learn more →</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Duck Collection</h3>
+                <p class="text-gray-600">Choose from our vast collection of debugging ducks, each with unique personalities.</p>
+                <a href="https://rubberduck.dev/collection" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">View collection →</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Duck Stats</h3>
+                <p class="text-gray-600">Track your debugging success rate and earn achievements with your duck.</p>
+                <a href="https://rubberduck.dev/stats" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Check stats →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-yellow-100 mt-12 p-8">
+        <div class="max-w-6xl mx-auto text-center text-gray-600">
+            <p>© 2024 Rubber Duck Emporium - Your trusted debugging companion</p>
+            <div class="mt-2">
+                <a href="https://rubberduck.dev/terms" class="hover:text-yellow-800 mx-2">Terms</a>
+                <a href="https://rubberduck.dev/privacy" class="hover:text-yellow-800 mx-2">Privacy</a>
+                <a href="https://rubberduck.dev/contact" class="hover:text-yellow-800 mx-2">Contact</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-<!DOCTYPE html> and ends with proper closing tags for all elements including </body> and </html>
-</body> and </html>
-</body> and </html>
-<!DOCTYPE html> and ends with the appropriate closing </body> and </html>
-</footer>
-</body>
-</html>
-<!DOCTYPE html> and ends with the appropriate closing tags </body> and </html>
-<!DOCTYPE html> and ends with the proper closing </body> and </html>
-</footer>
-</body>
-</html>
-</footer>
-</body>
-</html>
-<!DOCTYPE html> and ends with the appropriate closing </body> and </html>
