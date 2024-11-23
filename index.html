@@ -1,47 +1,70 @@
-Here's the corrected HTML with proper structure and improved accessibility:
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rubber Duck Emporium - Your Digital Duck Companion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <style>
         .duck-pixel {
             image-rendering: pixelated;
-            width: 32px;
-            height: 32px;
+            width: 48px;
+            height: 48px;
             background: #ffde00;
             position: relative;
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .duck-pixel:hover {
+            transform: scale(1.1) rotate(5deg);
         }
         .duck-pixel::before {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 24px;
-            width: 8px;
-            height: 8px;
+            top: 12px;
+            left: 36px;
+            width: 12px;
+            height: 12px;
             background: #ff8800;
+            border-radius: 50% 50% 45% 45%;
+            transform: rotate(-15deg);
         }
         .duck-pixel::after {
             content: '';
             position: absolute;
-            top: 12px;
-            left: 8px;
-            width: 4px;
-            height: 4px;
+            top: 18px;
+            left: 12px;
+            width: 6px;
+            height: 6px;
             background: #000;
             border-radius: 50%;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
         }
         .water-ripple {
             background: linear-gradient(180deg, #a5d8ff 0%, #74c0fc 100%);
-            animation: ripple 2s infinite;
+            animation: ripple 3s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .water-ripple::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.1) 100%);
+            animation: wave 4s infinite linear;
         }
         @keyframes ripple {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -53,9 +76,9 @@ Here's the corrected HTML with proper structure and improved accessibility:
                 Rubber Duck Emporium
             </h1>
             <div class="space-x-4">
-                <a href="https://rubberduck.dev/debug" class="hover:text-yellow-800">Debug with Ducks</a>
-                <a href="https://rubberduck.dev/shop" class="hover:text-yellow-800">Duck Shop</a>
-                <a href="https://rubberduck.dev/community" class="hover:text-yellow-800">Duck Community</a>
+                <a href="https://rubberduck.dev/debug" class="hover:text-yellow-800 transition-colors">Debug with Ducks</a>
+                <a href="https://rubberduck.dev/shop" class="hover:text-yellow-800 transition-colors">Duck Shop</a>
+                <a href="https://rubberduck.dev/community" class="hover:text-yellow-800 transition-colors">Duck Community</a>
             </div>
         </nav>
     </header>
@@ -71,18 +94,18 @@ Here's the corrected HTML with proper structure and improved accessibility:
                         <textarea 
                             id="problem-input"
                             name="problem" 
-                            class="w-full p-2 border rounded" 
+                            class="w-full p-2 border rounded shadow-inner" 
                             rows="4" 
                             placeholder="Explain your code problem to the duck..."
                             aria-label="Enter your coding problem for rubber duck debugging"></textarea>
                     </div>
-                    <button type="submit" class="bg-yellow-400 px-4 py-2 rounded hover:bg-yellow-500 transition">
+                    <button type="submit" class="bg-yellow-400 px-6 py-3 rounded-lg hover:bg-yellow-500 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
                         Start Debugging Session
                     </button>
                 </form>
             </div>
-            <div class="water-ripple rounded-lg p-8 flex items-center justify-center">
-                <div class="grid grid-cols-3 gap-4">
+            <div class="water-ripple rounded-lg p-8 flex items-center justify-center shadow-lg">
+                <div class="grid grid-cols-3 gap-6">
                     <div class="duck-pixel"></div>
                     <div class="duck-pixel"></div>
                     <div class="duck-pixel"></div>
@@ -93,18 +116,18 @@ Here's the corrected HTML with proper structure and improved accessibility:
             </div>
         </section>
 
-        <section class="mt-12 grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow">
+        <section class="mt-12 grid md:grid-cols-3 gap-8" aria-live="polite" id="stats-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <h3 class="text-xl font-bold mb-2">Debug Mode</h3>
                 <p class="text-gray-600">Our ducks are trained in multiple programming languages and debugging techniques.</p>
                 <a href="https://rubberduck.dev/features" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Learn more →</a>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <h3 class="text-xl font-bold mb-2">Duck Collection</h3>
                 <p class="text-gray-600">Choose from our vast collection of debugging ducks, each with unique personalities.</p>
                 <a href="https://rubberduck.dev/collection" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">View collection →</a>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow">
+            <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <h3 class="text-xl font-bold mb-2">Duck Stats</h3>
                 <p class="text-gray-600">Track your debugging success rate and earn achievements with your duck.</p>
                 <a href="https://rubberduck.dev/stats" class="text-yellow-600 hover:text-yellow-700 mt-2 inline-block">Check stats →</a>
@@ -116,9 +139,9 @@ Here's the corrected HTML with proper structure and improved accessibility:
         <div class="max-w-6xl mx-auto text-center text-gray-600">
             <p>© 2024 Rubber Duck Emporium - Your trusted debugging companion</p>
             <div class="mt-2">
-                <a href="https://rubberduck.dev/terms" class="hover:text-yellow-800 mx-2">Terms</a>
-                <a href="https://rubberduck.dev/privacy" class="hover:text-yellow-800 mx-2">Privacy</a>
-                <a href="https://rubberduck.dev/contact" class="hover:text-yellow-800 mx-2">Contact</a>
+                <a href="https://rubberduck.dev/terms" class="hover:text-yellow-800 mx-2 transition-colors">Terms</a>
+                <a href="https://rubberduck.dev/privacy" class="hover:text-yellow-800 mx-2 transition-colors">Privacy</a>
+                <a href="https://rubberduck.dev/contact" class="hover:text-yellow-800 mx-2 transition-colors">Contact</a>
             </div>
         </div>
     </footer>
