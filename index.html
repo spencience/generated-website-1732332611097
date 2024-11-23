@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" role="document">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rubber Duck Emporium - Your digital rubber duck debugging companion. Get help solving coding problems with our patient pixel-perfect duck listeners.">
     <title>Rubber Duck Emporium - Your Digital Duck Companion</title>
     <script src="https://cdn.tailwindcss.com" defer></script>
     <style>
@@ -15,6 +16,7 @@
             border-radius: 50% 50% 45% 45%;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .duck-pixel:hover {
             transform: scale(1.1) rotate(5deg);
@@ -57,6 +59,19 @@
             background: radial-gradient(circle at center, transparent 0%, rgba(255,255,255,0.1) 100%);
             animation: wave 4s infinite linear;
         }
+        .game-container {
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .duck-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
         @keyframes ripple {
             0% { transform: scale(1); }
             50% { transform: scale(1.02); }
@@ -66,11 +81,16 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .bounce { animation: bounce 1s infinite; }
     </style>
 </head>
 <body class="bg-yellow-50">
-    <header class="bg-yellow-400 p-4 shadow-md">
-        <nav class="max-w-6xl mx-auto flex justify-between items-center">
+    <header class="bg-yellow-400 p-4 shadow-md" role="banner">
+        <nav class="max-w-6xl mx-auto flex justify-between items-center" role="navigation">
             <h1 class="text-3xl font-bold flex items-center gap-2">
                 <div class="duck-pixel"></div>
                 Rubber Duck Emporium
@@ -83,8 +103,8 @@
         </nav>
     </header>
 
-    <main class="max-w-6xl mx-auto p-8">
-        <section class="grid md:grid-cols-2 gap-8">
+    <main class="max-w-6xl mx-auto p-8" role="main">
+        <section class="grid md:grid-cols-2 gap-8" aria-label="Debug Assistant">
             <div class="space-y-4">
                 <h2 class="text-2xl font-bold">Your Digital Debugging Companion</h2>
                 <p class="text-gray-700">Welcome to the world's premier digital rubber duck debugging assistant. Our pixel-perfect ducks are here to help you solve your coding problems with their patient listening skills.</p>
@@ -106,17 +126,31 @@
             </div>
             <div class="water-ripple rounded-lg p-8 flex items-center justify-center shadow-lg">
                 <div class="grid grid-cols-3 gap-6">
-                    <div class="duck-pixel"></div>
-                    <div class="duck-pixel"></div>
-                    <div class="duck-pixel"></div>
-                    <div class="duck-pixel"></div>
-                    <div class="duck-pixel"></div>
-                    <div class="duck-pixel"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 1"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 2"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 3"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 4"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 5"></div>
+                    <div class="duck-pixel" role="button" tabindex="0" aria-label="Interactive duck 6"></div>
                 </div>
             </div>
         </section>
 
-        <section class="mt-12 grid md:grid-cols-3 gap-8" aria-live="polite" id="stats-section">
+        <section class="game-container" aria-label="Duck Memory Game">
+            <h2 class="text-2xl font-bold text-center mb-4">Duck Memory Game</h2>
+            <p class="text-center mb-4">Match the bouncing ducks! Click on ducks to find pairs.</p>
+            <div class="duck-grid" id="gameGrid">
+                <div class="duck-pixel" data-duck="1"></div>
+                <div class="duck-pixel" data-duck="1"></div>
+                <div class="duck-pixel" data-duck="2"></div>
+                <div class="duck-pixel" data-duck="2"></div>
+                <div class="duck-pixel" data-duck="3"></div>
+                <div class="duck-pixel" data-duck="3"></div>
+            </div>
+            <p class="text-center" id="score">Matches: 0</p>
+        </section>
+
+        <section class="mt-12 grid md:grid-cols-3 gap-8" aria-label="Features and Statistics">
             <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                 <h3 class="text-xl font-bold mb-2">Debug Mode</h3>
                 <p class="text-gray-600">Our ducks are trained in multiple programming languages and debugging techniques.</p>
@@ -135,7 +169,7 @@
         </section>
     </main>
 
-    <footer class="bg-yellow-100 mt-12 p-8">
+    <footer class="bg-yellow-100 mt-12 p-8" role="contentinfo">
         <div class="max-w-6xl mx-auto text-center text-gray-600">
             <p>© 2024 Rubber Duck Emporium - Your trusted debugging companion</p>
             <div class="mt-2">
@@ -145,5 +179,55 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const gameGrid = document.getElementById('gameGrid');
+        const scoreDisplay = document.getElementById('score');
+        let firstPick = null;
+        let secondPick = null;
+        let matches = 0;
+        let locked = false;
+
+        gameGrid.querySelectorAll('.duck-pixel').forEach(duck => {
+            duck.addEventListener('click', () => {
+                if (locked || duck === firstPick || duck.classList.contains('matched')) return;
+                
+                duck.classList.add('bounce');
+                
+                if (!firstPick) {
+                    firstPick = duck;
+                } else if (!secondPick) {
+                    secondPick = duck;
+                    checkMatch();
+                }
+            });
+        });
+
+        function checkMatch() {
+            locked = true;
+            if (firstPick.dataset.duck === secondPick.dataset.duck) {
+                matches++;
+                scoreDisplay.textContent = `Matches: ${matches}`;
+                firstPick.classList.add('matched');
+                secondPick.classList.add('matched');
+                resetPicks();
+                if (matches === 3) {
+                    setTimeout(() => alert('Congratulations! You matched all the ducks!'), 500);
+                }
+            } else {
+                setTimeout(() => {
+                    firstPick.classList.remove('bounce');
+                    secondPick.classList.remove('bounce');
+                    resetPicks();
+                }, 1000);
+            }
+        }
+
+        function resetPicks() {
+            firstPick = null;
+            secondPick = null;
+            locked = false;
+        }
+    </script>
 </body>
 </html>
